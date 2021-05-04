@@ -1,0 +1,236 @@
+[
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "employeeId",
+    "expression": "grel:cell.cross(\"Nedap employees\", \"objectId\")[0].cells[\"identificationNo\"].value",
+    "onError": "set-to-blank",
+    "newColumnName": "employee_uri",
+    "columnInsertIndex": 1,
+    "description": "Create column employee_uri at index 1 based on column employeeId using expression grel:cell.cross(\"Nedap employees\", \"objectId\")[0].cells[\"identificationNo\"].value"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "startDate",
+    "expression": "grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')",
+    "onError": "set-to-blank",
+    "newColumnName": "startDatum",
+    "columnInsertIndex": 7,
+    "description": "Create column startDatum at index 7 based on column startDate using expression grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "endDate",
+    "expression": "grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')",
+    "onError": "set-to-blank",
+    "newColumnName": "eindDatum",
+    "columnInsertIndex": 9,
+    "description": "Create column eindDatum at index 9 based on column endDate using expression grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "endDate",
+    "expression": "grel:diff( value.toString().toDate('E MMM d kk:mm:ss z y'), cells.startDate.value.toString().toDate('E MMM d kk:mm:ss z y'), \"minutes\")*1.0/60",
+    "onError": "set-to-blank",
+    "newColumnName": "gewerkteUren",
+    "columnInsertIndex": 9,
+    "description": "Create column gewerkteUren at index 9 based on column endDate using expression grel:diff( value.toString().toDate('E MMM d kk:mm:ss z y'), cells.startDate.value.toString().toDate('E MMM d kk:mm:ss z y'), \"minutes\")*1.0/60"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "objectId",
+    "expression": "grel:if(cells.activityObjectId.value == 14079061, value.toString(\"%.0f\"), null)",
+    "onError": "set-to-blank",
+    "newColumnName": "gewerkt_uri",
+    "columnInsertIndex": 3,
+    "description": "Create column gewerkt_uri at index 3 based on column objectId using expression grel:if(cells.activityObjectId.value == 14079061, value.toString(\"%.0f\"), null)"
+  },
+  {
+    "op": "mapping-editor/save-rdf-mapping",
+    "mapping": {
+      "baseIRI": "http://example.com/base/",
+      "namespaces": {
+        "data": "http://datastation.sensire.nl/",
+        "kik": "https://purl.org/ozo/kik#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+      },
+      "subjectMappings": [
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "employee_uri"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:employee/"
+            }
+          },
+          "typeMappings": [],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "heeftGewerkt"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "gewerkt_uri"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "data:presence/"
+                  },
+                  "valueType": {
+                    "type": "iri",
+                    "typeMappings": [
+                      {
+                        "valueSource": {
+                          "source": "constant",
+                          "constant": "GewerktePeriode"
+                        },
+                        "transformation": {
+                          "language": "prefix",
+                          "expression": "kik"
+                        }
+                      }
+                    ],
+                    "propertyMappings": [
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "startDatum"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "startDatum"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "date"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "eindDatum"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "eindDatum"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "date"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "gewerkteUren"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "gewerkteUren"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "decimal"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "description": "Save RDF Mapping"
+  }
+]
