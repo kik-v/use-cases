@@ -1,0 +1,45 @@
+PREFIX kik: <https://purl.org/ozo/kik#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT (SUM(?dagen_periode) AS ?totaal_werk) (SUM(?dagen_ziekte_corr) AS ?totaal_ziek) (ROUND((?totaal_ziek/?totaal_werk)*100) AS ?indicator)
+
+WHERE {
+    {
+        #selecteer werknemers met een arbeidsovereenkomst of oproepovereenkomst in de gevraagde periode
+        SELECT DISTINCT ?start_periode ?eind_periode ?werknemer
+        WHERE {
+            BIND ("2020-01-01"^^xsd:date AS ?start_periode)
+            BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
+            VALUES ?type_overeenkomst {kik:ArbeidsOvereenkomst kik:OproepOvereenkomst}
+            ?overeenkomst a ?type_overeenkomst ;
+                       kik:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
+            FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
+            ?werknemer kik:heeftWerkOvereenkomst ?overeenkomst .
+         }
+    }
+    ?werknemer kik:heeftVerzuimPeriode ?periode .
+    ?periode kik:startDatum ?start_ziekte .
+    OPTIONAL {?periode kik:eindDatum ?eind_ziekte_voorl}
+    
+    #Alleen ziektemeldingen binnen de gevraagde periode
+    FILTER(?start_ziekte <= ?eind_periode && ((?eind_ziekte_voorl >= ?start_periode) || (!BOUND(?eind_ziekte_voorl))))
+    #Corrigeer voor ziekte die langer doorloopt dan de periode
+    BIND(IF(?eind_ziekte_voorl > ?eind_periode, ?eind_periode, ?eind_ziekte_voorl) AS ?eind_ziekte)
+    
+    OPTIONAL {?periode kik:ziektePercentage ?percentage_ziekte_voorl}
+    BIND(IF(BOUND(?percentage_ziekte_voorl), ?percentage_ziekte_voorl, "100"^^xsd:decimal) AS ?percentage_ziekte)
+    
+    #Tel aantal ziektedagen o.b.v. 12 maanden van 30 dagen per jaar en corrigeeer voor ziektepercentage
+    BIND ((360 * (YEAR(?eind_ziekte) - YEAR(?start_ziekte))) +
+        (30 * (MONTH(?eind_ziekte) - MONTH(?start_ziekte))) +
+        IF((DAY(?eind_ziekte) - DAY(?start_ziekte)) < 29, (DAY(?eind_ziekte) - DAY(?start_ziekte)), 29) + 1
+        AS ?dagen_ziekte)
+    BIND(?dagen_ziekte * ?percentage_ziekte / 100 AS ?dagen_ziekte_corr)
+    
+    #Tel aantal dagen in periode o.b.v. 12 maanden van 30 dagen per jaar
+    BIND ((360 * (YEAR(?eind_periode) - YEAR(?start_periode))) +
+        (30 * (MONTH(?eind_periode) - MONTH(?start_periode))) +
+        IF((DAY(?eind_periode) - DAY(?start_periode)) < 29, (DAY(?eind_periode) - DAY(?start_periode)), 29) + 1
+        AS ?dagen_periode)
+}
