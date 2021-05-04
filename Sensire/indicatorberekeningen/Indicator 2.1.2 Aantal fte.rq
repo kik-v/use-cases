@@ -1,0 +1,43 @@
+PREFIX kik: <https://purl.org/ozo/kik#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX vph: <http://www.zinl.nl/ontologies/VPH-domain-ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?start_periode ?eind_periode (SUM(?aantal) AS ?totaal_aantal) ?eenheid
+
+WHERE {
+    {
+        #selecteer werknemers met een arbeidsovereenkomst of oproepovereenkomst in de gevraagde periode
+        SELECT DISTINCT ?start_periode ?eind_periode ?werknemer
+        WHERE {
+            BIND ("2020-01-01"^^xsd:date AS ?start_periode)
+            BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
+            VALUES ?type_overeenkomst {kik:ArbeidsOvereenkomst kik:OproepOvereenkomst}
+            ?overeenkomst a ?type_overeenkomst ;
+                       kik:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
+            FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
+            ?werknemer kik:heeftWerkOvereenkomst ?overeenkomst .
+         }
+    }
+    ?werknemer kik:heeftGewerkt ?periode .
+    ?periode kik:startDatum ?start_gewerkt ;
+             kik:eindDatum ?eind_gewerkt ;
+             kik:gewerkteUren ?uren_gewerkt .
+    
+    #Alleen gewerktmeldingen binnen de gevraagde periode
+    FILTER(?start_gewerkt >= ?start_periode && ?eind_gewerkt <= ?eind_periode)
+
+    #Rapporteer op alle eenheden per week
+    ?e a vph:UnitOfWorkload ;
+       kik:hasNumericalValue ?corr_factor ;
+       kik:hasDenominatorQualityValue vph:Week ;
+       rdfs:label ?eenheid .
+    
+    BIND ((360 * (YEAR(?eind_periode) - YEAR(?start_periode))) +
+        (30 * (MONTH(?eind_periode) - MONTH(?start_periode))) +
+        IF((DAY(?eind_periode) - DAY(?start_periode)) < 29, (DAY(?eind_periode) - DAY(?start_periode)), 29) + 1
+        AS ?dagen_periode)
+    BIND (?uren_gewerkt/(?dagen_periode/360*47)/?corr_factor AS ?aantal)
+}
+GROUP BY ?start_periode ?eind_periode ?eenheid
