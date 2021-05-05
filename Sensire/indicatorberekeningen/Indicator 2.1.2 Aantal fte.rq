@@ -18,6 +18,7 @@ WHERE {
             OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
             FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
             ?werknemer kik:heeftWerkOvereenkomst ?overeenkomst .
+            ?overeenkomst kik:geeftFunctie/a kik:ZorgverlenerFunctie . #Alleen overeenkomsten met zorgverlener functies
          }
     }
     ?werknemer kik:heeftGewerkt ?periode .
