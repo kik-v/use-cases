@@ -1,0 +1,16 @@
+PREFIX vph: <http://www.zinl.nl/ontologies/VPH-domain-ontology#>
+PREFIX kik: <https://purl.org/ozo/kik#>
+INSERT {
+    ?overeenkomst kik:beschrijftGewerktePeriode ?gewerkte_periode
+} 
+where { 
+	?persoon a vph:Human ;
+    	     kik:heeftWerkOvereenkomst ?overeenkomst ;
+             kik:heeftGewerkt ?gewerkte_periode .
+    ?overeenkomst kik:startDatum ?start_overeenkomst .
+    OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst} .   
+    ?gewerkte_periode kik:startDatum ?start_periode ;
+                      kik:eindDatum ?eind_periode .
+    
+    FILTER(?start_overeenkomst <= ?start_periode  && ((?eind_overeenkomst >= ?eind_periode)||(!BOUND(?eind_overeenkomst))) )
+}
