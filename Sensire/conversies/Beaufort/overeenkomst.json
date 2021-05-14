@@ -306,7 +306,7 @@
                                     {
                                       "valueSource": {
                                         "source": "constant",
-                                        "constant": "uren_per_week_unit"
+                                        "constant": "Uren_per_week_unit"
                                       },
                                       "transformation": {
                                         "language": "prefix",
