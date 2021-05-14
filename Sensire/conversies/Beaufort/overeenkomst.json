@@ -78,7 +78,7 @@
             {
               "valueSource": {
                 "source": "constant",
-                "constant": "Person"
+                "constant": "Human"
               },
               "transformation": {
                 "language": "prefix",
