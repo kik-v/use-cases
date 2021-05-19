@@ -1,7 +1,7 @@
 PREFIX vph: <http://www.zinl.nl/ontologies/VPH-domain-ontology#>
 PREFIX kik: <https://purl.org/ozo/kik#>
 INSERT {
-    ?overeenkomst kik:beschrijftGewerktePeriode ?gewerkte_periode
+    ?overeenkomst kik:bijbehorendeGewerktePeriode ?gewerkte_periode
 } 
 where { 
 	?persoon a vph:Human ;
