@@ -5,21 +5,21 @@ SELECT (COUNT(DISTINCT ?personeel_bepaalde_tijd) AS ?teller) (COUNT(DISTINCT ?pe
 
 WHERE { 
     #Definieer peildatum
-    BIND("2018-12-01"^^xsd:date AS ?peildatum)
+    BIND("2019-07-01"^^xsd:date AS ?peildatum)
 
     {
         #Selecteer personen met arbeidsovereenkomst bepaalde tijd
         ?bepaalde_tijd a kik:ArbeidsOvereenkomstBepaaldeTijd ;
                        kik:startDatum ?start_overeenkomst ;
                        kik:eindDatum ?eind_overeenkomst ;
-                       kik:geeftFunctie/a kik:ZorgverlenerFunctie ;
-                       ^kik:heeftWerkOvereenkomst ?personeel_bepaalde_tijd .
+                       kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie ;
+                       kik:heeftOpdrachtnemer ?personeel_bepaalde_tijd .
     } UNION {
         #Selecteer personen met een arbeidsovereenkomst
         ?arbeidsovereenkomst a kik:ArbeidsOvereenkomst ;
                              kik:startDatum ?start_overeenkomst ;
-                             kik:geeftFunctie/a kik:ZorgverlenerFunctie ;
-                             ^kik:heeftWerkOvereenkomst ?personeel .
+                             kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie ;
+                             kik:heeftOpdrachtnemer ?personeel .
         OPTIONAL {?arbeidsovereenkomst kik:eindDatum ?eind_overeenkomst}
     }
     
