@@ -1,0 +1,906 @@
+[
+    {
+      "op": "core/column-addition",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "baseColumnName": "begindatum",
+      "expression": "grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")",
+      "onError": "set-to-blank",
+      "newColumnName": "startDatum",
+      "columnInsertIndex": 3,
+      "description": "Create column startDatum at index 3 based on column begindatum using expression grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")"
+    },
+    {
+      "op": "core/column-addition",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "baseColumnName": "einddatum",
+      "expression": "grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")",
+      "onError": "set-to-blank",
+      "newColumnName": "eindDatum",
+      "columnInsertIndex": 5,
+      "description": "Create column eindDatum at index 5 based on column einddatum using expression grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")"
+    },
+    {
+      "op": "core/column-addition",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "baseColumnName": "PERS_NR",
+      "expression": "grel:randomNumber(1000000000,9999999999)",
+      "onError": "set-to-blank",
+      "newColumnName": "random_id",
+      "columnInsertIndex": 1,
+      "description": "Create column random_id at index 1 based on column PERS_NR using expression grel:randomNumber(1000000000,9999999999)"
+    },
+    {
+      "op": "core/column-addition",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "baseColumnName": "DEELB_PERC",
+      "expression": "grel:value/100",
+      "onError": "set-to-blank",
+      "newColumnName": "Parttime_factor",
+      "columnInsertIndex": 10,
+      "description": "Create column Parttime_factor at index 10 based on column DEELB_PERC using expression grel:value/100"
+    },
+    {
+      "op": "core/text-transform",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "columnName": "arelsrt_kd",
+      "expression": "grel:toNumber(value)",
+      "onError": "keep-original",
+      "repeat": false,
+      "repeatCount": 10,
+      "description": "Text transform on cells in column arelsrt_kd using expression grel:toNumber(value)"
+    },
+    {
+      "op": "core/text-transform",
+      "engineConfig": {
+        "facets": [],
+        "mode": "row-based"
+      },
+      "columnName": "oe_sleutel",
+      "expression": "grel:value.strip()",
+      "onError": "keep-original",
+      "repeat": false,
+      "repeatCount": 10,
+      "description": "Text transform on cells in column oe_sleutel using expression grel:value.strip()"
+    },
+    {
+      "op": "mapping-editor/save-rdf-mapping",
+      "mapping": {
+        "baseIRI": "http://datastation.sensire.nl/",
+        "namespaces": {
+          "data": "http://datastation.sensire.nl/",
+          "kik": "https://purl.org/ozo/kik#",
+          "vph": "https://purl.org/ozo/vph#",
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
+          "onto": "http://onto.sensire.nl#"
+        },
+        "subjectMappings": [
+          {
+            "subject": {
+              "valueSource": {
+                "source": "column",
+                "columnName": "PERS_NR"
+              },
+              "transformation": {
+                "language": "prefix",
+                "expression": "data:employee/"
+              }
+            },
+            "typeMappings": [
+              {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "Human"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "vph"
+                }
+              }
+            ],
+            "propertyMappings": [
+              {
+                "property": {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "heeftWerkOvereenkomst"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "kik"
+                  }
+                },
+                "values": [
+                  {
+                    "valueSource": {
+                      "source": "column",
+                      "columnName": "random_id"
+                    },
+                    "transformation": {
+                      "language": "prefix",
+                      "expression": "data:werkovereenkomst/"
+                    },
+                    "valueType": {
+                      "type": "iri",
+                      "typeMappings": [
+                        {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "WerkOvereenkomst"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        }
+                      ],
+                      "propertyMappings": [
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "startDatum"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "startDatum"
+                              },
+                              "valueType": {
+                                "type": "datatype_literal",
+                                "datatype": {
+                                  "valueSource": {
+                                    "source": "constant",
+                                    "constant": "date"
+                                  },
+                                  "transformation": {
+                                    "language": "prefix",
+                                    "expression": "xsd"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "heeftContractOmvang"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "random_id"
+                              },
+                              "transformation": {
+                                "language": "prefix",
+                                "expression": "data:contractomvang/"
+                              },
+                              "valueType": {
+                                "type": "iri",
+                                "typeMappings": [
+                                  {
+                                    "valueSource": {
+                                      "source": "constant",
+                                      "constant": "ContractOmvang"
+                                    },
+                                    "transformation": {
+                                      "language": "prefix",
+                                      "expression": "kik"
+                                    }
+                                  }
+                                ],
+                                "propertyMappings": [
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "startDatum"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "startDatum"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "date"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "eindDatum"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "eindDatum"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "date"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "hasNumericalValue"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "UREN_PW"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "decimal"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "hasUnitOfMeasure"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "constant",
+                                          "constant": "Uren_per_week_unit"
+                                        },
+                                        "transformation": {
+                                          "language": "prefix",
+                                          "expression": "kik"
+                                        },
+                                        "valueType": {
+                                          "type": "iri",
+                                          "typeMappings": [],
+                                          "propertyMappings": []
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "parttimeFactor"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "Parttime_factor"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "decimal"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "bijbehorendeFunctie"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "random_id"
+                              },
+                              "transformation": {
+                                "language": "prefix",
+                                "expression": "data:functie/"
+                              },
+                              "valueType": {
+                                "type": "iri",
+                                "typeMappings": [
+                                  {
+                                    "valueSource": {
+                                      "source": "column",
+                                      "columnName": "PRIMFUNC_KD"
+                                    },
+                                    "transformation": {
+                                      "language": "prefix",
+                                      "expression": "onto:Functie/"
+                                    }
+                                  }
+                                ],
+                                "propertyMappings": [
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "startDatum"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "startDatum"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "date"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "eindDatum"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "kik"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "eindDatum"
+                                        },
+                                        "valueType": {
+                                          "type": "datatype_literal",
+                                          "datatype": {
+                                            "valueSource": {
+                                              "source": "constant",
+                                              "constant": "date"
+                                            },
+                                            "transformation": {
+                                              "language": "prefix",
+                                              "expression": "xsd"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "property": {
+                                      "valueSource": {
+                                        "source": "constant",
+                                        "constant": "function_id"
+                                      },
+                                      "transformation": {
+                                        "language": "prefix",
+                                        "expression": "onto"
+                                      }
+                                    },
+                                    "values": [
+                                      {
+                                        "valueSource": {
+                                          "source": "column",
+                                          "columnName": "PRIMFUNC_KD"
+                                        },
+                                        "valueType": {
+                                          "type": "literal"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "eindDatum"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "eindDatum"
+                              },
+                              "valueType": {
+                                "type": "datatype_literal",
+                                "datatype": {
+                                  "valueSource": {
+                                    "source": "constant",
+                                    "constant": "date"
+                                  },
+                                  "transformation": {
+                                    "language": "prefix",
+                                    "expression": "xsd"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "soortContract"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "onto"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "srt_arbovk"
+                              },
+                              "valueType": {
+                                "type": "literal"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "soortArbeidsrelatie"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "onto"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "arelsrt_kd"
+                              },
+                              "valueType": {
+                                "type": "datatype_literal",
+                                "datatype": {
+                                  "valueSource": {
+                                    "source": "constant",
+                                    "constant": "integer"
+                                  },
+                                  "transformation": {
+                                    "language": "prefix",
+                                    "expression": "xsd"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "heeftKostenplaats"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "kplts"
+                              },
+                              "transformation": {
+                                "language": "prefix",
+                                "expression": "data:kostenplaats/"
+                              },
+                              "valueType": {
+                                "type": "iri",
+                                "typeMappings": [],
+                                "propertyMappings": []
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "functieCode"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "onto"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "PRIMFUNC_KD"
+                              },
+                              "valueType": {
+                                "type": "literal"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "DV_VLGNR"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "onto"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "DV_VLGNR"
+                              },
+                              "valueType": {
+                                "type": "literal"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "heeftOpdrachtnemer"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "column",
+                                "columnName": "PERS_NR"
+                              },
+                              "transformation": {
+                                "language": "prefix",
+                                "expression": "data:employee/"
+                              },
+                              "valueType": {
+                                "type": "iri",
+                                "typeMappings": [],
+                                "propertyMappings": []
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "property": {
+                            "valueSource": {
+                              "source": "constant",
+                              "constant": "heeftOpdrachtgever"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "kik"
+                            }
+                          },
+                          "values": [
+                            {
+                              "valueSource": {
+                                "source": "constant",
+                                "constant": "http://www.sensire.nl"
+                              },
+                              "transformation": {
+                                "language": "raw"
+                              },
+                              "valueType": {
+                                "type": "iri",
+                                "typeMappings": [
+                                  {
+                                    "valueSource": {
+                                      "source": "constant",
+                                      "constant": "NursingHomeOrganization"
+                                    },
+                                    "transformation": {
+                                      "language": "prefix",
+                                      "expression": "vph"
+                                    }
+                                  }
+                                ],
+                                "propertyMappings": []
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "property": {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "heeftFunctie"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "kik"
+                  }
+                },
+                "values": [
+                  {
+                    "valueSource": {
+                      "source": "column",
+                      "columnName": "random_id"
+                    },
+                    "transformation": {
+                      "language": "prefix",
+                      "expression": "data:functie/"
+                    },
+                    "valueType": {
+                      "type": "iri",
+                      "typeMappings": [],
+                      "propertyMappings": []
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "subject": {
+              "valueSource": {
+                "source": "column",
+                "columnName": "oe_sleutel"
+              },
+              "transformation": {
+                "language": "prefix",
+                "expression": "data:oe/"
+              }
+            },
+            "typeMappings": [
+              {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "OrganizationalUnit"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              }
+            ],
+            "propertyMappings": [
+              {
+                "property": {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "oe_sleutel"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "onto"
+                  }
+                },
+                "values": [
+                  {
+                    "valueSource": {
+                      "source": "column",
+                      "columnName": "oe_sleutel"
+                    },
+                    "valueType": {
+                      "type": "literal"
+                    }
+                  }
+                ]
+              },
+              {
+                "property": {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "heeftKostenplaats"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "kik"
+                  }
+                },
+                "values": [
+                  {
+                    "valueSource": {
+                      "source": "column",
+                      "columnName": "kplts"
+                    },
+                    "transformation": {
+                      "language": "prefix",
+                      "expression": "data:kostenplaats/"
+                    },
+                    "valueType": {
+                      "type": "iri",
+                      "typeMappings": [
+                        {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "CostCenter"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        }
+                      ],
+                      "propertyMappings": []
+                    }
+                  }
+                ]
+              },
+              {
+                "property": {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "partOf"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "kik"
+                  }
+                },
+                "values": [
+                  {
+                    "valueSource": {
+                      "source": "constant",
+                      "constant": "http://www.sesnsire.nl"
+                    },
+                    "transformation": {
+                      "language": "raw"
+                    },
+                    "valueType": {
+                      "type": "iri",
+                      "typeMappings": [],
+                      "propertyMappings": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Save RDF Mapping"
+    }
+  ]
