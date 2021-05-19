@@ -15,11 +15,10 @@ WHERE {
             BIND("2020-12-31"^^xsd:date AS ?eind_periode)
 
             #selecteer alle arbeids- en oproepovereenkomsten
-            { ?overeenkomst a kik:ArbeidsOvereenkomst } UNION
-            { ?overeenkomst a kik:OproepOvereenkomst }
+            ?overeenkomst a kik:ArbeidsOvereenkomst .
 
             #Selecteer alle functies die kik:ZorgverlenerFunctie zijn
-            ?overeenkomst kik:geeftFunctie/a kik:ZorgverlenerFunctie .
+            ?overeenkomst kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie .
             
             ?overeenkomst kik:startDatum ?start_overeenkomst .
             OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
