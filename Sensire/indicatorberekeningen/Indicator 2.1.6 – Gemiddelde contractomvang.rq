@@ -17,12 +17,12 @@ WHERE {
     
     #selecteer alle arbeids- en oproepovereenkomsten met een zorgverlenerfunctie
     ?arbeidsovereenkomst a kik:ArbeidsOvereenkomst .
-    ?arbeidsovereenkomst kik:geeftFunctie/a kik:ZorgverlenerFunctie ;
+    ?arbeidsovereenkomst kik:bijbehorendeFunctie/a kik:Functie ;
                          kik:heeftContractOmvang ?omvang ;
-                         ^kik:heeftWerkOvereenkomst ?persoon .
+                         kik:heeftOpdrachtnemer ?persoon .
     
     #bepaal van alle arbeidsovereenkomsten de omvang
-    ?omvang kik:hasNumericalValue ?waarde ;
+    ?omvang kik:numeriekeWaarde ?waarde ;
             kik:hasUnitOfMeasure ?eenheid ;
             kik:startDatum ?start_omvang .
     OPTIONAL {?omvang kik:eindDatum ?eind_omvang}
@@ -42,10 +42,10 @@ WHERE {
     BIND(?dagen_omvang_corr/?dagen_periode AS ?correctie_periode)
     
     #correct voor verschillende eenheden
-    ?gevraagde_eenheid kik:hasNumericalValue ?gevraagde_eenheid_waarde ;
+    ?gevraagde_eenheid kik:numeriekeWaarde ?gevraagde_eenheid_waarde ;
                                     kik:hasDenominatorQualityValue ?noemer_eenheid ;
                                     kik:hasNumeratorQualityValue ?teller_eenheid .
-    ?eenheid kik:hasNumericalValue ?eenheid_waarde ;
+    ?eenheid kik:numeriekeWaarde ?eenheid_waarde ;
                   kik:hasDenominatorQualityValue ?noemer_eenheid ;
                   kik:hasNumeratorQualityValue ?teller_eenheid .
     BIND(?eenheid_waarde/?gevraagde_eenheid_waarde AS ?correctie_factor)
