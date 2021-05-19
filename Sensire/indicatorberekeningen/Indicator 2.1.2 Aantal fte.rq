@@ -12,13 +12,12 @@ WHERE {
         WHERE {
             BIND ("2020-01-01"^^xsd:date AS ?start_periode)
             BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
-            VALUES ?type_overeenkomst {kik:ArbeidsOvereenkomst kik:OproepOvereenkomst}
-            ?overeenkomst a ?type_overeenkomst ;
+            ?overeenkomst a kik:ArbeidsOvereenkomst ;
                        kik:startDatum ?start_overeenkomst .
             OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
             FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
             ?werknemer kik:heeftWerkOvereenkomst ?overeenkomst .
-            ?overeenkomst kik:geeftFunctie/a kik:ZorgverlenerFunctie . #Alleen overeenkomsten met zorgverlener functies
+            ?overeenkomst kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie . #Alleen overeenkomsten met zorgverlener functies
          }
     }
     ?werknemer kik:heeftGewerkt ?periode .
@@ -31,7 +30,7 @@ WHERE {
 
     #Rapporteer op alle eenheden per week
     ?e a vph:UnitOfWorkload ;
-       kik:hasNumericalValue ?corr_factor ;
+       kik:numeriekeWaarde ?corr_factor ;
        kik:hasDenominatorQualityValue vph:Week ;
        rdfs:label ?eenheid .
     
