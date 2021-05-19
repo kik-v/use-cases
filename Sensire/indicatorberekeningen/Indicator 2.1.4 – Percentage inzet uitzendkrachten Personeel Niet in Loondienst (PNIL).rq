@@ -14,11 +14,11 @@ WHERE {
     BIND("2020-01-01"^^xsd:date AS ?start_periode)
     BIND("2020-12-31"^^xsd:date AS ?eind_periode)
     ?overeenkomst kik:startDatum ?start_overeenkomst ;
-                  kik:geeftFunctie/a kik:ZorgverlenerFunctie .           #Filter op zorgverlener
+                  kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie .           #Filter op zorgverlener
     OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
     FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
     
-    ?gewerkteperiode ^kik:beschrijftGewerktePeriode ?overeenkomst ; 
+    ?gewerkteperiode ^kik:bijbehorendeGewerktePeriode ?overeenkomst ; 
         			 kik:startDatum ?start_werk ;
                      kik:eindDatum ?eind_werk ;
                      kik:gewerkteUren ?uren ;
