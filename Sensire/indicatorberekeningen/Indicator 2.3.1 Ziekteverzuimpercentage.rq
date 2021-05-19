@@ -12,7 +12,7 @@ WHERE {
             BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
             VALUES ?type_overeenkomst {kik:ArbeidsOvereenkomst kik:OproepOvereenkomst}
             ?overeenkomst a ?type_overeenkomst ;
-                          kik:geeftFunctie/a kik:ZorgverlenerFunctie ;  
+                          kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie ;  
                           kik:startDatum ?start_overeenkomst .
             OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
             FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
