@@ -1,0 +1,268 @@
+[
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Ziektetijdvak tot",
+    "expression": "grel:value.toDate('yyyy-MM-dd').inc(-1,\"day\").toString('yyyy-MM-dd')",
+    "onError": "set-to-blank",
+    "newColumnName": "eindDatum",
+    "columnInsertIndex": 4,
+    "description": "Create column eindDatum at index 4 based on column Ziektetijdvak tot using expression grel:value.toDate('yyyy-MM-dd').inc(-1,\"day\").toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "Technische sleutel ziektegeval",
+    "expression": "grel:cell.cross(\"Ziektegeval\", \"Technische sleutel\")[0].cells[\"Reden ziek\"].value",
+    "onError": "set-to-blank",
+    "newColumnName": "Reden ziek",
+    "columnInsertIndex": 7,
+    "description": "Create column Reden ziek at index 7 based on column Technische sleutel ziektegeval using expression grel:cell.cross(\"Ziektegeval\", \"Technische sleutel\")[0].cells[\"Reden ziek\"].value"
+  },
+  {
+    "op": "mapping-editor/save-rdf-mapping",
+    "mapping": {
+      "baseIRI": "http://example.com/base/",
+      "namespaces": {
+        "data": "http://datastation.sensire.nl/",
+        "kik": "https://purl.org/ozo/kik#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "onto": "http://onto.sensire.nl#"
+      },
+      "subjectMappings": [
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "Technische sleutel ziektetijdvak"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:verzuimperiode/"
+            }
+          },
+          "typeMappings": [
+            {
+              "valueSource": {
+                "source": "constant",
+                "constant": "VerzuimPeriode"
+              },
+              "transformation": {
+                "language": "prefix",
+                "expression": "kik"
+              }
+            }
+          ],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "startDatum"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Ziektetijdvak vanaf"
+                  },
+                  "valueType": {
+                    "type": "datatype_literal",
+                    "datatype": {
+                      "valueSource": {
+                        "source": "constant",
+                        "constant": "date"
+                      },
+                      "transformation": {
+                        "language": "prefix",
+                        "expression": "xsd"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "herstelDatum"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Ziektetijdvak tot"
+                  },
+                  "valueType": {
+                    "type": "datatype_literal",
+                    "datatype": {
+                      "valueSource": {
+                        "source": "constant",
+                        "constant": "date"
+                      },
+                      "transformation": {
+                        "language": "prefix",
+                        "expression": "xsd"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "ziektePercentage"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "% ziek"
+                  },
+                  "valueType": {
+                    "type": "datatype_literal",
+                    "datatype": {
+                      "valueSource": {
+                        "source": "constant",
+                        "constant": "decimal"
+                      },
+                      "transformation": {
+                        "language": "prefix",
+                        "expression": "xsd"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "eindDatum"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "eindDatum"
+                  },
+                  "valueType": {
+                    "type": "datatype_literal",
+                    "datatype": {
+                      "valueSource": {
+                        "source": "constant",
+                        "constant": "date"
+                      },
+                      "transformation": {
+                        "language": "prefix",
+                        "expression": "xsd"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "reden_ziek"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "onto"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Reden ziek"
+                  },
+                  "valueType": {
+                    "type": "literal"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "persoonsnummer"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:employee/"
+            }
+          },
+          "typeMappings": [],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "heeftVerzuimPeriode"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Technische sleutel ziektetijdvak"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "data:verzuimperiode/"
+                  },
+                  "valueType": {
+                    "type": "iri",
+                    "typeMappings": [],
+                    "propertyMappings": []
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "description": "Save RDF Mapping"
+  }
+]
