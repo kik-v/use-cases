@@ -288,7 +288,7 @@
                                     "property": {
                                       "valueSource": {
                                         "source": "constant",
-                                        "constant": "hasNumericalValue"
+                                        "constant": "numeriekeWaarde"
                                       },
                                       "transformation": {
                                         "language": "prefix",
