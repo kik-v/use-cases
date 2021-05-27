@@ -1,0 +1,231 @@
+[
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "BeginDatum",
+    "expression": "grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')",
+    "onError": "set-to-blank",
+    "newColumnName": "startDatum",
+    "columnInsertIndex": 9,
+    "description": "Create column startDatum at index 9 based on column BeginDatum using expression grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "EindDatum",
+    "expression": "grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')",
+    "onError": "set-to-blank",
+    "newColumnName": "eindDatum",
+    "columnInsertIndex": 11,
+    "description": "Create column eindDatum at index 11 based on column EindDatum using expression grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Client_ID",
+    "expression": "grel:value.floor()",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Client_ID using expression grel:value.floor()"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Arrangement_ID",
+    "expression": "grel:value.floor()",
+    "onError": "set-to-blank",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column Arrangement_ID using expression grel:value.floor()"
+  },
+  {
+    "op": "mapping-editor/save-rdf-mapping",
+    "mapping": {
+      "baseIRI": "http://example.com/base/",
+      "namespaces": {
+        "data": "http://datastation.sensire.nl/",
+        "vph": "https://purl.org/ozo/vph#",
+        "kik": "https://purl.org/ozo/kik#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+      },
+      "subjectMappings": [
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "Client_ID"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:client/"
+            }
+          },
+          "typeMappings": [
+            {
+              "valueSource": {
+                "source": "constant",
+                "constant": "Human"
+              },
+              "transformation": {
+                "language": "prefix",
+                "expression": "vph"
+              }
+            }
+          ],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "hasRole"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "vph"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "Client"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "kik"
+                  },
+                  "valueType": {
+                    "type": "iri",
+                    "typeMappings": [],
+                    "propertyMappings": []
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "is_client_binnen_verpleegproces"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "kik"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Arrangement_ID"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "data:zorgproces/"
+                  },
+                  "valueType": {
+                    "type": "iri",
+                    "typeMappings": [
+                      {
+                        "valueSource": {
+                          "source": "constant",
+                          "constant": "NursingProcess"
+                        },
+                        "transformation": {
+                          "language": "prefix",
+                          "expression": "kik"
+                        }
+                      }
+                    ],
+                    "propertyMappings": [
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "startDatum"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "startDatum"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "date"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "eindDatum"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "kik"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "eindDatum"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "date"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "description": "Save RDF Mapping"
+  }
+]
