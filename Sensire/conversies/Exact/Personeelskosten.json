@@ -1,0 +1,229 @@
+[
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "date",
+    "expression": "grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column date using expression grel:value.replace(' ','-').toDate('EEE-MMM-dd-kk:mm:ss-z-yyyy').toString('yyyy-MM-dd')"
+  },
+  {
+    "op": "core/column-addition",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "baseColumnName": "GegevensSet",
+    "expression": "grel:if(value=='Kosten PIL','WPer','WBedOvpUik')",
+    "onError": "set-to-blank",
+    "newColumnName": "RGS",
+    "columnInsertIndex": 1,
+    "description": "Create column RGS at index 1 based on column GegevensSet using expression grel:if(value=='Kosten PIL','WPer','WBedOvpUik')"
+  },
+  {
+    "op": "mapping-editor/save-rdf-mapping",
+    "mapping": {
+      "baseIRI": "http://example.com/base/",
+      "namespaces": {
+        "data": "http://data.sensire.nl/",
+        "fin": "http://purl.org/ozo/fin#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "vph": "https://purl.org/ozo/vph#"
+      },
+      "subjectMappings": [
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "GLAccountCode"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:grootboekrekening/"
+            }
+          },
+          "typeMappings": [
+            {
+              "valueSource": {
+                "source": "constant",
+                "constant": "GrootboekRekening"
+              },
+              "transformation": {
+                "language": "prefix",
+                "expression": "fin"
+              }
+            }
+          ],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "heeftFinancieleBoeking"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "fin"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "row_index"
+                  },
+                  "valueType": {
+                    "type": "unique_bnode",
+                    "typeMappings": [
+                      {
+                        "valueSource": {
+                          "source": "constant",
+                          "constant": "FinancieleBoeking"
+                        },
+                        "transformation": {
+                          "language": "prefix",
+                          "expression": "fin"
+                        }
+                      }
+                    ],
+                    "propertyMappings": [
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "boekingsDatum"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "fin"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "date"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "date"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "heeftKostenplaats"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "fin"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "CostCenter"
+                            },
+                            "transformation": {
+                              "language": "prefix",
+                              "expression": "data:kostenplaats/"
+                            },
+                            "valueType": {
+                              "type": "iri",
+                              "typeMappings": [],
+                              "propertyMappings": []
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "property": {
+                          "valueSource": {
+                            "source": "constant",
+                            "constant": "heeftFinancieleWaarde"
+                          },
+                          "transformation": {
+                            "language": "prefix",
+                            "expression": "fin"
+                          }
+                        },
+                        "values": [
+                          {
+                            "valueSource": {
+                              "source": "column",
+                              "columnName": "AmountDC"
+                            },
+                            "valueType": {
+                              "type": "datatype_literal",
+                              "datatype": {
+                                "valueSource": {
+                                  "source": "constant",
+                                  "constant": "decimal"
+                                },
+                                "transformation": {
+                                  "language": "prefix",
+                                  "expression": "xsd"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "partOf"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "vph"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "RGS"
+                  },
+                  "transformation": {
+                    "language": "prefix",
+                    "expression": "fin"
+                  },
+                  "valueType": {
+                    "type": "iri",
+                    "typeMappings": [],
+                    "propertyMappings": []
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "description": "Save RDF Mapping"
+  }
+]
