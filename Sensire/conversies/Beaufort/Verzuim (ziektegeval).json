@@ -1,0 +1,76 @@
+[
+  {
+    "op": "mapping-editor/save-rdf-mapping",
+    "mapping": {
+      "baseIRI": "http://example.com/base/",
+      "namespaces": {
+        "data": "http://datastation.sensire.nl/",
+        "onto": "http://onto.sensire.nl#"
+      },
+      "subjectMappings": [
+        {
+          "subject": {
+            "valueSource": {
+              "source": "column",
+              "columnName": "Technische sleutel"
+            },
+            "transformation": {
+              "language": "prefix",
+              "expression": "data:verzuimperiode/"
+            }
+          },
+          "typeMappings": [],
+          "propertyMappings": [
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "reden_ziek"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "onto"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Reden ziek"
+                  },
+                  "valueType": {
+                    "type": "literal"
+                  }
+                }
+              ]
+            },
+            {
+              "property": {
+                "valueSource": {
+                  "source": "constant",
+                  "constant": "code_ziek"
+                },
+                "transformation": {
+                  "language": "prefix",
+                  "expression": "onto"
+                }
+              },
+              "values": [
+                {
+                  "valueSource": {
+                    "source": "column",
+                    "columnName": "Code ziek of wegens"
+                  },
+                  "valueType": {
+                    "type": "literal"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "description": "Save RDF Mapping"
+  }
+]
