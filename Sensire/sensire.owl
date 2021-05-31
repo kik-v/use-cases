@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108#"
+     xml:base="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108"
+     xmlns:kik="https://purl.org/ozo/kik#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:vph="https://purl.org/ozo/vph#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://purl.org/ozo/vph#hasPart -->
+
+    <owl:ObjectProperty rdf:about="https://purl.org/ozo/vph#hasPart">
+        <owl:inverseOf rdf:resource="https://purl.org/ozo/vph#partOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://purl.org/ozo/vph#partOf -->
+
+    <owl:ObjectProperty rdf:about="https://purl.org/ozo/vph#partOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://onto.sensire.nl#functieCode -->
+
+    <owl:DatatypeProperty rdf:about="http://onto.sensire.nl#functieCode"/>
+    
+
+
+    <!-- http://onto.sensire.nl#soortArbeidsrelatie -->
+
+    <owl:DatatypeProperty rdf:about="http://onto.sensire.nl#soortArbeidsrelatie"/>
+    
+
+
+    <!-- http://onto.sensire.nl#soortContract -->
+
+    <owl:DatatypeProperty rdf:about="http://onto.sensire.nl#soortContract"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://purl.org/ozo/fin#GrootboekRekening -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/fin#GrootboekRekening"/>
+    
+
+
+    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomst">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
+                                <owl:hasValue>0</owl:hasValue>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstBBL -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstBBL">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#functieCode"/>
+                                <owl:hasValue>1111</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#functieCode"/>
+                                <owl:hasValue>1132</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#functieCode"/>
+                                <owl:hasValue>1452</owl:hasValue>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstBepaaldeTijd -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstBepaaldeTijd">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomst"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstOnbepaaldeTijd -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstOnbepaaldeTijd">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#ArbeidsOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#InhuurOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#InhuurOvereenkomst">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                                <owl:someValuesFrom>
+                                    <rdfs:Datatype>
+                                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                                        <owl:withRestrictions rdf:parseType="Collection">
+                                            <rdf:Description>
+                                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</xsd:minInclusive>
+                                            </rdf:Description>
+                                            <rdf:Description>
+                                                <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">199</xsd:maxInclusive>
+                                            </rdf:Description>
+                                        </owl:withRestrictions>
+                                    </rdfs:Datatype>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
+                                <owl:hasValue>90</owl:hasValue>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#MinMaxContract -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#MinMaxContract">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
+                        <owl:hasValue>4</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#NulUrenContract -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#NulUrenContract">
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#OproepOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#OproepOvereenkomst">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
+                        <owl:hasValue>1</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#OproepcontractMetVoorovereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#OproepcontractMetVoorovereenkomst">
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#PayrollOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#PayrollOvereenkomst">
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#UitzendOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#StageOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#StageOvereenkomst">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</owl:hasValue>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
+                                <owl:hasValue>3</owl:hasValue>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#UitzendOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#UitzendOvereenkomst">
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#VrijwilligersOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#VrijwilligersOvereenkomst">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/kik#WerkOvereenkomst -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4000 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4000">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4005 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4005">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4010 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4010">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4015 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4015">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4020 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4020">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4030 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4030">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4070 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4070">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4072 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4072">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4080 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4080">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4086 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4086">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WBedOvpUik"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4090 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4090">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4100 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4100">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4106 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4106">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4130 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4130">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4132 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4132">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.sensire.nl/grootboekrekening/4190 -->
+
+    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4190">
+        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://purl.org/ozo/fin#WBedOvpUik -->
+
+    <owl:NamedIndividual rdf:about="https://purl.org/ozo/fin#WBedOvpUik">
+        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootboekRekening"/>
+        <rdfs:label>Uitzendkrachten overige personeelskosten</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://purl.org/ozo/fin#WPer -->
+
+    <owl:NamedIndividual rdf:about="https://purl.org/ozo/fin#WPer">
+        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootboekRekening"/>
+        <vph:hasPart rdf:resource="https://purl.org/ozo/fin#WBedOvpUik"/>
+        <rdfs:label>Lasten uit hoofde van personeelsbeloningen</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
