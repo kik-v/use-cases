@@ -31,7 +31,7 @@
       "baseIRI": "http://example.com/base/",
       "namespaces": {
         "data": "http://data.sensire.nl/",
-        "fin": "http://purl.org/ozo/fin#",
+        "fin": "https://purl.org/ozo/fin#",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "vph": "https://purl.org/ozo/vph#"
       },
@@ -147,7 +147,18 @@
                             },
                             "valueType": {
                               "type": "iri",
-                              "typeMappings": [],
+                              "typeMappings": [
+                                {
+                                  "valueSource": {
+                                    "source": "constant",
+                                    "constant": "KostenPlaats"
+                                  },
+                                  "transformation": {
+                                    "language": "prefix",
+                                    "expression": "fin"
+                                  }
+                                }
+                              ],
                               "propertyMappings": []
                             }
                           }

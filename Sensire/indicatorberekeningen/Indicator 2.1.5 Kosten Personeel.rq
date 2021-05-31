@@ -1,0 +1,19 @@
+#Selectie gebaseerd op Referentie GrootboekSchema (RGS)
+PREFIX fin: <https://purl.org/ozo/fin#>
+PREFIX vph: <https://purl.org/ozo/vph#>
+
+SELECT (SUM(?bedrag_personeel) AS ?noemer) (SUM(?bedrag_pnil) AS ?teller) (ROUND(?teller/?noemer*100) AS ?indicator)
+
+WHERE { 
+    {
+	fin:WPer vph:hasPart ?gb_personeel .
+    ?gb_personeel fin:heeftFinancieleBoeking ?boeking_personeel .
+    ?boeking_personeel fin:boekingsDatum ?datum ;
+                       fin:heeftFinancieleWaarde ?bedrag_personeel .
+	} UNION {
+	fin:WBedOvpUik vph:hasPart ?gb_pnil .
+    ?gb_pnil fin:heeftFinancieleBoeking ?boeking_pnil .
+    ?boeking_pnil fin:boekingsDatum ?datum ;
+                       fin:heeftFinancieleWaarde ?bedrag_pnil .
+	}
+}
