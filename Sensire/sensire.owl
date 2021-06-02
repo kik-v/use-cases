@@ -8,7 +8,7 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108"/>
+    <owl:Ontology rdf:about="http://onto.sensire.nl#"/>
     
 
 
@@ -179,6 +179,12 @@
     
 
 
+    <!-- https://purl.org/ozo/kik#Functie -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#Functie"/>
+    
+
+
     <!-- https://purl.org/ozo/kik#InhuurOvereenkomst -->
 
     <owl:Class rdf:about="https://purl.org/ozo/kik#InhuurOvereenkomst">
@@ -345,6 +351,14 @@
     
 
 
+    <!-- https://purl.org/ozo/kik#ZorgverlenerFunctie -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/kik#ZorgverlenerFunctie">
+        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#Functie"/>
+    </owl:Class>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -480,6 +494,447 @@
 
     <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4190">
         <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/%20 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/%20">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Propositieverantwoordelijke</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1105 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1105">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verzorgende Wijkzorg</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1110 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1110">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verzorgende IG</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1111 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1111">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Leerling verzorgende IG</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1116 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1116">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Thuisbegeleider Jeugd</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1121 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1121">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">VTH verpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1125 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1125">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Wijkverpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1126 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1126">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Trainee Wijkverpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1130 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1130">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundige Wijkzorg</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1132 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1132">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Leerling vp 4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1145 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1145">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Jeugdverpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1150 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1150">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Jeugdarts</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1155 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1155">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Dietist</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1161 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1161">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Stagiaire</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1176 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1176">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Ergotherapeut</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1400 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1400">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Gespecialiseerde verpleegkundi</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1403 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1403">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Medewerker Service Team</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1407 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1407">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Psycholoog</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1410 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1410">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Teamverpleegkundige 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1411 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1411">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundig Specialist</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1412 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1412">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Coordinerend Verpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1413 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1413">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundige Wonen met Zorg</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1414 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1414">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verzorgende wonen met zorg</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1416 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1416">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Woonbegeleider 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1425 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1425">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Leerling HBO-V</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1426 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1426">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Senior Teamverpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1434 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1434">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundige Ulcus Cruris</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1446 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1446">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Trainee teamverpleegkundige</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1452 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1452">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Leerling Woonbegeleider 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1454 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1454">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundig specialist i.o.</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1458 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1458">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Woonbegeleider plus</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1462 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1462">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Voorzitter WijGro</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/1464 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1464">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Muziektherapeut</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/3563 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/3563">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Woonbegeleider 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/3583 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/3583">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Geestelijke verzorger 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/4425 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/4425">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verpleegkundige ZOA</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/4430 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/4430">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Verzorgende ZOA</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/5310 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5310">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Maatschappelijk werker</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/5313 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5313">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Sociaal raadsman/vrouw</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/5315 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5315">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Budgetconsulent</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/5316 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5316">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Coördinator informele Zorg</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7735 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7735">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Activiteitenbegeleider</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7800 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7800">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Specialist ouderengeneeskunde</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7802 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7802">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Fysiotherapeut</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7804 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7804">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Logopedist</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7806 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7806">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">GZ psycholoog</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7813 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7813">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">GZ psycholoog io</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7815 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7815">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Basisarts</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Functie/7834 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7834">
+        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdfs:label xml:lang="nl">Wknd/vak/invkr Direct</rdfs:label>
     </owl:NamedIndividual>
     
 
