@@ -6,7 +6,7 @@
       "mode": "row-based"
     },
     "baseColumnName": "begindatum",
-    "expression": "grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")",
+    "expression": "grel:value.toString().toDate('d-M-yyyy').toString(\"yyyy-MM-dd\")",
     "onError": "set-to-blank",
     "newColumnName": "startDatum",
     "columnInsertIndex": 3,
@@ -19,7 +19,7 @@
       "mode": "row-based"
     },
     "baseColumnName": "einddatum",
-    "expression": "grel:value.toString().toDate('E MMM d kk:mm:ss z y').toString(\"yyyy-MM-dd\")",
+    "expression": "grel:value.toString().toDate('d-M-yyyy').toString(\"yyyy-MM-dd\")",
     "onError": "set-to-blank",
     "newColumnName": "eindDatum",
     "columnInsertIndex": 5,
