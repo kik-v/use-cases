@@ -1,5 +1,5 @@
-PREFIX vph: <https://purl.org/ozo/vph#>
-PREFIX kik: <https://purl.org/ozo/kik#>
+PREFIX vph-g: <http://purl.org/ozo/vph-g#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT (COUNT(DISTINCT(?stagiaire)) AS ?aantal_stagiaires)
@@ -10,12 +10,13 @@ WHERE {
     BIND("2020-12-31"^^xsd:date AS ?eind_periode)
     
     #Selecteer alle stageovereenkomsten
-    ?stagiaire a vph:Human ;
-               kik:heeftWerkOvereenkomst ?stageovereenkomst .
-    ?stageovereenkomst a kik:StageOvereenkomst;
-                               kik:startDatum ?start_overeenkomst ;
-                               kik:eindDatum ?eind_overeenkomst .
+    ?stagiaire a vph-g:Human ;
+               vph-pers:heeftWerkOvereenkomst ?stageovereenkomst .
+    ?stageovereenkomst a vph-pers:StageOvereenkomst;
+                               vph-pers:startDatum ?start_overeenkomst ;
+                               vph-pers:eindDatum ?eind_overeenkomst .
     
     #Selecteer stageovereenkomsten binnen gevraagde periode
-    FILTER(?start_overeenkomst <= ?eind_periode || ?eind_overeenkomst >= ?start_overeenkomst)
+    FILTER (?start_overeenkomst <= ?eind_periode && (!BOUND(?eind_overeenkomst) || ?eind_overeenkomst >= 
+                ?start_periode))
 }

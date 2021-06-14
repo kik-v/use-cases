@@ -1,5 +1,5 @@
-PREFIX vph: <https://purl.org/ozo/vph#>
-PREFIX kik: <https://purl.org/ozo/kik#>
+PREFIX vph-g: <http://purl.org/ozo/vph-g#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -15,20 +15,20 @@ WHERE {
             BIND("2020-12-31"^^xsd:date AS ?eind_periode)
 
             #selecteer alle arbeids- en oproepovereenkomsten
-            ?overeenkomst a kik:ArbeidsOvereenkomst .
+            ?overeenkomst a vph-pers:ArbeidsOvereenkomst .
 
-            #Selecteer alle functies die kik:ZorgverlenerFunctie zijn
-            ?overeenkomst kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie .
+            #Selecteer alle functies die vph-pers:ZorgverlenerFunctie zijn
+            ?overeenkomst vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie .
             
-            ?overeenkomst kik:startDatum ?start_overeenkomst .
-            OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
+            ?overeenkomst vph-pers:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
 
             #Alleen overeenkomsten in gevraagde periode
             FILTER (?start_overeenkomst <= ?eind_periode && (!BOUND(?eind_overeenkomst) || ?eind_overeenkomst >= 
                 ?start_periode))
 
             #Koppel persoon, zodat unieke instanties geteld kunnen worden
-            ?persoon kik:heeftWerkOvereenkomst ?overeenkomst .
+            ?persoon vph-pers:heeftWerkOvereenkomst ?overeenkomst .
 
             #Corrigeer wanneer start of eind van de functie buiten de gevraagde periode valt
             BIND(IF(?start_periode > ?start_overeenkomst, ?start_periode, ?start_overeenkomst) AS ?start_overeenkomst_corr)

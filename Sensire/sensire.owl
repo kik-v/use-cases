@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108#"
      xml:base="http://www.semanticweb.org/marc/ontologies/2021/2/untitled-ontology-108"
-     xmlns:kik="https://purl.org/ozo/kik#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:vph="https://purl.org/ozo/vph#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vph-g="https://purl.org/ozo/vph-g#"
+     xmlns:vph-g1="http://purl.org/ozo/vph-g#"
+     xmlns:vph-pers="http://purl.org/ozo/vph-pers#">
     <owl:Ontology rdf:about="http://onto.sensire.nl#"/>
     
 
@@ -23,18 +24,18 @@
     
 
 
-    <!-- https://purl.org/ozo/vph#hasPart -->
+    <!-- http://purl.org/ozo/vph-g#hasPart -->
 
-    <owl:ObjectProperty rdf:about="https://purl.org/ozo/vph#hasPart">
-        <owl:inverseOf rdf:resource="https://purl.org/ozo/vph#partOf"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/ozo/vph-g#hasPart">
+        <owl:inverseOf rdf:resource="http://purl.org/ozo/vph-g#partOf"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- https://purl.org/ozo/vph#partOf -->
+    <!-- http://purl.org/ozo/vph-g#partOf -->
 
-    <owl:ObjectProperty rdf:about="https://purl.org/ozo/vph#partOf">
+    <owl:ObjectProperty rdf:about="http://purl.org/ozo/vph-g#partOf">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </owl:ObjectProperty>
     
@@ -80,28 +81,22 @@
     
 
 
-    <!-- https://purl.org/ozo/fin#GrootboekRekening -->
+    <!-- http://purl.org/ozo/vph-pers#ArbeidsOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/fin#GrootboekRekening"/>
-    
-
-
-    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomst -->
-
-    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomst">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomst">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</owl:hasValue>
+                                <owl:hasValue>007</owl:hasValue>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
-                                <owl:hasValue>0</owl:hasValue>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
                             </owl:Restriction>
                         </owl:unionOf>
                     </owl:Class>
@@ -112,13 +107,13 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstBBL -->
+    <!-- http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstBBL -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstBBL">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstBBL">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -142,13 +137,13 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstBepaaldeTijd -->
+    <!-- http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstBepaaldeTijd -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstBepaaldeTijd">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstBepaaldeTijd">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomst"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
                         <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</owl:hasValue>
@@ -160,38 +155,38 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#ArbeidsOvereenkomstOnbepaaldeTijd -->
+    <!-- http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstOnbepaaldeTijd -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#ArbeidsOvereenkomstOnbepaaldeTijd">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomstOnbepaaldeTijd">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</owl:hasValue>
+                        <owl:hasValue>003</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#ArbeidsOvereenkomst"/>
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#ArbeidsOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#Functie -->
+    <!-- http://purl.org/ozo/vph-pers#Functie -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#Functie"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#Functie"/>
     
 
 
-    <!-- https://purl.org/ozo/kik#InhuurOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#InhuurOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#InhuurOvereenkomst">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#InhuurOvereenkomst">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -212,55 +207,55 @@
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
-                                <owl:hasValue>90</owl:hasValue>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">90</owl:hasValue>
                             </owl:Restriction>
                         </owl:unionOf>
                     </owl:Class>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#MinMaxContract -->
+    <!-- http://purl.org/ozo/vph-pers#MinMaxContract -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#MinMaxContract">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#MinMaxContract">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
-                        <owl:hasValue>4</owl:hasValue>
+                        <owl:hasValue>004</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#OproepOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#NulUrenContract -->
+    <!-- http://purl.org/ozo/vph-pers#NulUrenContract -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#NulUrenContract">
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#NulUrenContract">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#OproepOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#OproepOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#OproepOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#OproepOvereenkomst">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#OproepOvereenkomst">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
-                        <owl:hasValue>1</owl:hasValue>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -269,46 +264,46 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#OproepcontractMetVoorovereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#OproepcontractMetVoorovereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#OproepcontractMetVoorovereenkomst">
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#OproepOvereenkomst"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#OproepcontractMetVoorovereenkomst">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#OproepOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#PayrollOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#PayrollOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#PayrollOvereenkomst">
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#UitzendOvereenkomst"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#PayrollOvereenkomst">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#UitzendOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#StageOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#StageOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#StageOvereenkomst">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#StageOvereenkomst">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</owl:hasValue>
+                                <owl:hasValue>005</owl:hasValue>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</owl:hasValue>
+                                <owl:hasValue>006</owl:hasValue>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</owl:hasValue>
+                                <owl:hasValue>010</owl:hasValue>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://onto.sensire.nl#soortContract"/>
-                                <owl:hasValue>3</owl:hasValue>
+                                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</owl:hasValue>
                             </owl:Restriction>
                         </owl:unionOf>
                     </owl:Class>
@@ -319,24 +314,24 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#UitzendOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#UitzendOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#UitzendOvereenkomst">
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#UitzendOvereenkomst">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
     </owl:Class>
     
 
 
-    <!-- https://purl.org/ozo/kik#VrijwilligersOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#VrijwilligersOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#VrijwilligersOvereenkomst">
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#VrijwilligersOvereenkomst">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+                    <rdf:Description rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://onto.sensire.nl#soortArbeidsrelatie"/>
-                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</owl:hasValue>
+                        <owl:hasValue>200</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -345,17 +340,23 @@
     
 
 
-    <!-- https://purl.org/ozo/kik#WerkOvereenkomst -->
+    <!-- http://purl.org/ozo/vph-pers#WerkOvereenkomst -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#WerkOvereenkomst"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#WerkOvereenkomst"/>
     
 
 
-    <!-- https://purl.org/ozo/kik#ZorgverlenerFunctie -->
+    <!-- http://purl.org/ozo/vph-pers#ZorgverlenerFunctie -->
 
-    <owl:Class rdf:about="https://purl.org/ozo/kik#ZorgverlenerFunctie">
-        <rdfs:subClassOf rdf:resource="https://purl.org/ozo/kik#Functie"/>
+    <owl:Class rdf:about="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ozo/vph-pers#Functie"/>
     </owl:Class>
+    
+
+
+    <!-- https://purl.org/ozo/fin#GrootBoekRekening -->
+
+    <owl:Class rdf:about="https://purl.org/ozo/fin#GrootBoekRekening"/>
     
 
 
@@ -370,138 +371,10 @@
     
 
 
-    <!-- http://data.sensire.nl/grootboekrekening/4000 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4000">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4005 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4005">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4010 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4010">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4015 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4015">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4020 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4020">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4030 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4030">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4070 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4070">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4072 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4072">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4080 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4080">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4086 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4086">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WBedOvpUik"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4090 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4090">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4100 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4100">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4106 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4106">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4130 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4130">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4132 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4132">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://data.sensire.nl/grootboekrekening/4190 -->
-
-    <owl:NamedIndividual rdf:about="http://data.sensire.nl/grootboekrekening/4190">
-        <vph:partOf rdf:resource="https://purl.org/ozo/fin#WPer"/>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://onto.sensire.nl#Functie/%20 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/%20">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Propositieverantwoordelijke</rdfs:label>
     </owl:NamedIndividual>
     
@@ -510,7 +383,7 @@
     <!-- http://onto.sensire.nl#Functie/1105 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1105">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verzorgende Wijkzorg</rdfs:label>
     </owl:NamedIndividual>
     
@@ -519,7 +392,7 @@
     <!-- http://onto.sensire.nl#Functie/1110 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1110">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verzorgende IG</rdfs:label>
     </owl:NamedIndividual>
     
@@ -528,7 +401,7 @@
     <!-- http://onto.sensire.nl#Functie/1111 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1111">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Leerling verzorgende IG</rdfs:label>
     </owl:NamedIndividual>
     
@@ -537,7 +410,7 @@
     <!-- http://onto.sensire.nl#Functie/1116 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1116">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Thuisbegeleider Jeugd</rdfs:label>
     </owl:NamedIndividual>
     
@@ -546,7 +419,7 @@
     <!-- http://onto.sensire.nl#Functie/1121 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1121">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">VTH verpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -555,7 +428,7 @@
     <!-- http://onto.sensire.nl#Functie/1125 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1125">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Wijkverpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -564,7 +437,7 @@
     <!-- http://onto.sensire.nl#Functie/1126 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1126">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Trainee Wijkverpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -573,7 +446,7 @@
     <!-- http://onto.sensire.nl#Functie/1130 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1130">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundige Wijkzorg</rdfs:label>
     </owl:NamedIndividual>
     
@@ -582,7 +455,7 @@
     <!-- http://onto.sensire.nl#Functie/1132 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1132">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Leerling vp 4</rdfs:label>
     </owl:NamedIndividual>
     
@@ -591,7 +464,7 @@
     <!-- http://onto.sensire.nl#Functie/1145 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1145">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Jeugdverpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -600,7 +473,7 @@
     <!-- http://onto.sensire.nl#Functie/1150 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1150">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Jeugdarts</rdfs:label>
     </owl:NamedIndividual>
     
@@ -609,7 +482,7 @@
     <!-- http://onto.sensire.nl#Functie/1155 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1155">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Dietist</rdfs:label>
     </owl:NamedIndividual>
     
@@ -618,7 +491,7 @@
     <!-- http://onto.sensire.nl#Functie/1161 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1161">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Stagiaire</rdfs:label>
     </owl:NamedIndividual>
     
@@ -627,7 +500,7 @@
     <!-- http://onto.sensire.nl#Functie/1176 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1176">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Ergotherapeut</rdfs:label>
     </owl:NamedIndividual>
     
@@ -636,7 +509,7 @@
     <!-- http://onto.sensire.nl#Functie/1400 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1400">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Gespecialiseerde verpleegkundi</rdfs:label>
     </owl:NamedIndividual>
     
@@ -645,7 +518,7 @@
     <!-- http://onto.sensire.nl#Functie/1403 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1403">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Medewerker Service Team</rdfs:label>
     </owl:NamedIndividual>
     
@@ -654,7 +527,7 @@
     <!-- http://onto.sensire.nl#Functie/1407 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1407">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Psycholoog</rdfs:label>
     </owl:NamedIndividual>
     
@@ -663,7 +536,7 @@
     <!-- http://onto.sensire.nl#Functie/1410 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1410">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Teamverpleegkundige 1</rdfs:label>
     </owl:NamedIndividual>
     
@@ -672,7 +545,7 @@
     <!-- http://onto.sensire.nl#Functie/1411 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1411">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundig Specialist</rdfs:label>
     </owl:NamedIndividual>
     
@@ -681,7 +554,7 @@
     <!-- http://onto.sensire.nl#Functie/1412 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1412">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Coordinerend Verpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -690,7 +563,7 @@
     <!-- http://onto.sensire.nl#Functie/1413 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1413">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundige Wonen met Zorg</rdfs:label>
     </owl:NamedIndividual>
     
@@ -699,7 +572,7 @@
     <!-- http://onto.sensire.nl#Functie/1414 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1414">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verzorgende wonen met zorg</rdfs:label>
     </owl:NamedIndividual>
     
@@ -708,7 +581,7 @@
     <!-- http://onto.sensire.nl#Functie/1416 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1416">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Woonbegeleider 2</rdfs:label>
     </owl:NamedIndividual>
     
@@ -717,7 +590,7 @@
     <!-- http://onto.sensire.nl#Functie/1425 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1425">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Leerling HBO-V</rdfs:label>
     </owl:NamedIndividual>
     
@@ -726,7 +599,7 @@
     <!-- http://onto.sensire.nl#Functie/1426 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1426">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Senior Teamverpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -735,7 +608,7 @@
     <!-- http://onto.sensire.nl#Functie/1434 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1434">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundige Ulcus Cruris</rdfs:label>
     </owl:NamedIndividual>
     
@@ -744,7 +617,7 @@
     <!-- http://onto.sensire.nl#Functie/1446 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1446">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Trainee teamverpleegkundige</rdfs:label>
     </owl:NamedIndividual>
     
@@ -753,7 +626,7 @@
     <!-- http://onto.sensire.nl#Functie/1452 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1452">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Leerling Woonbegeleider 2</rdfs:label>
     </owl:NamedIndividual>
     
@@ -762,7 +635,7 @@
     <!-- http://onto.sensire.nl#Functie/1454 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1454">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundig specialist i.o.</rdfs:label>
     </owl:NamedIndividual>
     
@@ -771,7 +644,7 @@
     <!-- http://onto.sensire.nl#Functie/1458 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1458">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Woonbegeleider plus</rdfs:label>
     </owl:NamedIndividual>
     
@@ -780,7 +653,7 @@
     <!-- http://onto.sensire.nl#Functie/1462 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1462">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Voorzitter WijGro</rdfs:label>
     </owl:NamedIndividual>
     
@@ -789,7 +662,7 @@
     <!-- http://onto.sensire.nl#Functie/1464 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/1464">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Muziektherapeut</rdfs:label>
     </owl:NamedIndividual>
     
@@ -798,7 +671,7 @@
     <!-- http://onto.sensire.nl#Functie/3563 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/3563">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Woonbegeleider 1</rdfs:label>
     </owl:NamedIndividual>
     
@@ -807,7 +680,7 @@
     <!-- http://onto.sensire.nl#Functie/3583 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/3583">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Geestelijke verzorger 2</rdfs:label>
     </owl:NamedIndividual>
     
@@ -816,7 +689,7 @@
     <!-- http://onto.sensire.nl#Functie/4425 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/4425">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verpleegkundige ZOA</rdfs:label>
     </owl:NamedIndividual>
     
@@ -825,7 +698,7 @@
     <!-- http://onto.sensire.nl#Functie/4430 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/4430">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Verzorgende ZOA</rdfs:label>
     </owl:NamedIndividual>
     
@@ -834,7 +707,7 @@
     <!-- http://onto.sensire.nl#Functie/5310 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5310">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Maatschappelijk werker</rdfs:label>
     </owl:NamedIndividual>
     
@@ -843,7 +716,7 @@
     <!-- http://onto.sensire.nl#Functie/5313 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5313">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Sociaal raadsman/vrouw</rdfs:label>
     </owl:NamedIndividual>
     
@@ -852,7 +725,7 @@
     <!-- http://onto.sensire.nl#Functie/5315 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5315">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Budgetconsulent</rdfs:label>
     </owl:NamedIndividual>
     
@@ -861,7 +734,7 @@
     <!-- http://onto.sensire.nl#Functie/5316 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/5316">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Coördinator informele Zorg</rdfs:label>
     </owl:NamedIndividual>
     
@@ -870,7 +743,7 @@
     <!-- http://onto.sensire.nl#Functie/7735 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7735">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Activiteitenbegeleider</rdfs:label>
     </owl:NamedIndividual>
     
@@ -879,7 +752,7 @@
     <!-- http://onto.sensire.nl#Functie/7800 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7800">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Specialist ouderengeneeskunde</rdfs:label>
     </owl:NamedIndividual>
     
@@ -888,7 +761,7 @@
     <!-- http://onto.sensire.nl#Functie/7802 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7802">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Fysiotherapeut</rdfs:label>
     </owl:NamedIndividual>
     
@@ -897,7 +770,7 @@
     <!-- http://onto.sensire.nl#Functie/7804 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7804">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Logopedist</rdfs:label>
     </owl:NamedIndividual>
     
@@ -906,7 +779,7 @@
     <!-- http://onto.sensire.nl#Functie/7806 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7806">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">GZ psycholoog</rdfs:label>
     </owl:NamedIndividual>
     
@@ -915,7 +788,7 @@
     <!-- http://onto.sensire.nl#Functie/7813 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7813">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">GZ psycholoog io</rdfs:label>
     </owl:NamedIndividual>
     
@@ -924,7 +797,7 @@
     <!-- http://onto.sensire.nl#Functie/7815 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7815">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Basisarts</rdfs:label>
     </owl:NamedIndividual>
     
@@ -933,26 +806,154 @@
     <!-- http://onto.sensire.nl#Functie/7834 -->
 
     <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Functie/7834">
-        <rdf:type rdf:resource="https://purl.org/ozo/kik#ZorgverlenerFunctie"/>
+        <rdf:type rdf:resource="http://purl.org/ozo/vph-pers#ZorgverlenerFunctie"/>
         <rdfs:label xml:lang="nl">Wknd/vak/invkr Direct</rdfs:label>
     </owl:NamedIndividual>
     
 
 
-    <!-- https://purl.org/ozo/fin#WBedOvpUik -->
+    <!-- http://onto.sensire.nl#Grootboekrekening/4000 -->
 
-    <owl:NamedIndividual rdf:about="https://purl.org/ozo/fin#WBedOvpUik">
-        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootboekRekening"/>
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4000">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4005 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4005">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4010 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4010">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4015 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4015">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4020 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4020">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4030 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4030">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4070 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4070">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4072 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4072">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4080 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4080">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4086 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4086">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WBedOvpUik"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4090 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4090">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4100 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4100">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4106 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4106">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4130 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4130">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4132 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4132">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://onto.sensire.nl#Grootboekrekening/4190 -->
+
+    <owl:NamedIndividual rdf:about="http://onto.sensire.nl#Grootboekrekening/4190">
+        <vph-g1:partOf rdf:resource="http://purl.org/ozo/vph-fin#WPer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/ozo/vph-fin#WBedOvpUik -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/ozo/vph-fin#WBedOvpUik">
+        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootBoekRekening"/>
         <rdfs:label>Uitzendkrachten overige personeelskosten</rdfs:label>
     </owl:NamedIndividual>
     
 
 
-    <!-- https://purl.org/ozo/fin#WPer -->
+    <!-- http://purl.org/ozo/vph-fin#WPer -->
 
-    <owl:NamedIndividual rdf:about="https://purl.org/ozo/fin#WPer">
-        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootboekRekening"/>
-        <vph:hasPart rdf:resource="https://purl.org/ozo/fin#WBedOvpUik"/>
+    <owl:NamedIndividual rdf:about="http://purl.org/ozo/vph-fin#WPer">
+        <rdf:type rdf:resource="https://purl.org/ozo/fin#GrootBoekRekening"/>
+        <vph-g1:hasPart rdf:resource="http://purl.org/ozo/vph-fin#WBedOvpUik"/>
         <rdfs:label>Lasten uit hoofde van personeelsbeloningen</rdfs:label>
     </owl:NamedIndividual>
 </rdf:RDF>
