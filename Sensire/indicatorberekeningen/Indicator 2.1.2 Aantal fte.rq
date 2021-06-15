@@ -1,6 +1,6 @@
-PREFIX kik: <https://purl.org/ozo/kik#>
+PREFIX vph-g: <http://purl.org/ozo/vph-g#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX vph: <http://www.zinl.nl/ontologies/VPH-domain-ontology#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?start_periode ?eind_periode (SUM(?aantal) AS ?totaal_aantal) ?eenheid
@@ -12,26 +12,26 @@ WHERE {
         WHERE {
             BIND ("2020-01-01"^^xsd:date AS ?start_periode)
             BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
-            ?overeenkomst a kik:ArbeidsOvereenkomst ;
-                       kik:startDatum ?start_overeenkomst .
-            OPTIONAL {?overeenkomst kik:eindDatum ?eind_overeenkomst}
+            ?overeenkomst a vph-pers:ArbeidsOvereenkomst ;
+                       vph-pers:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
             FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
-            ?werknemer kik:heeftWerkOvereenkomst ?overeenkomst .
-            ?overeenkomst kik:bijbehorendeFunctie/a kik:ZorgverlenerFunctie . #Alleen overeenkomsten met zorgverlener functies
+            ?werknemer vph-pers:heeftWerkOvereenkomst ?overeenkomst .
+            ?overeenkomst vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie . #Alleen overeenkomsten met zorgverlener functies
          }
     }
-    ?werknemer kik:heeftGewerkt ?periode .
-    ?periode kik:startDatum ?start_gewerkt ;
-             kik:eindDatum ?eind_gewerkt ;
-             kik:gewerkteUren ?uren_gewerkt .
+    ?werknemer vph-pers:heeftGewerkt ?periode .
+    ?periode vph-pers:startDatum ?start_gewerkt ;
+             vph-pers:eindDatum ?eind_gewerkt ;
+             vph-pers:gewerkteUren ?uren_gewerkt .
     
     #Alleen gewerktmeldingen binnen de gevraagde periode
     FILTER(?start_gewerkt >= ?start_periode && ?eind_gewerkt <= ?eind_periode)
 
     #Rapporteer op alle eenheden per week
-    ?e a vph:UnitOfWorkload ;
-       kik:numeriekeWaarde ?corr_factor ;
-       kik:hasDenominatorQualityValue vph:Week ;
+    ?e a vph-g:UnitOfWorkload ;
+       vph-pers:numeriekeWaarde ?corr_factor ;
+       vph-pers:hasDenominatorQualityValue vph-g:Week ;
        rdfs:label ?eenheid .
     
     BIND ((360 * (YEAR(?eind_periode) - YEAR(?start_periode))) +
