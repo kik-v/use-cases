@@ -1,0 +1,83 @@
+PREFIX vph-g: <http://purl.org/ozo/vph-g#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+#Verzuimfrequentie. Let op: datums periode op twee plekken aanpassen!
+
+SELECT (COUNT(?verzuim) AS ?teller) (SUM(?dagen_overeenkomst_corr)/MAX(?dagen_periode) AS ?noemer) (COUNT(?verzuim)/(SUM(?dagen_overeenkomst_corr)/MAX(?dagen_periode)) AS ?verzuimfrequentie)
+WHERE 
+{
+    { 
+        ?persoon vph-pers:heeftVerzuimPeriode ?verzuim .
+        ?verzuim a vph-pers:VerzuimPeriode ;
+                 vph-pers:startDatum ?start_verzuim .
+        FILTER (?start_verzuim >= ?start_periode && ?start_verzuim <= ?eind_periode)
+        {
+        	SELECT DISTINCT ?persoon ?start_periode ?eind_periode 
+            WHERE 
+            {
+                #definieer periode waarin overeenkomst geldig moet zijn
+                BIND("2020-01-01"^^xsd:date AS ?start_periode)
+                BIND("2020-12-31"^^xsd:date AS ?eind_periode)
+
+                #selecteer alle arbeids- en oproepovereenkomsten
+                ?overeenkomst a vph-pers:ArbeidsOvereenkomst .
+
+                #Selecteer alle functies die vph-pers:ZorgverlenerFunctie zijn
+                ?overeenkomst vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie .
+                
+                ?overeenkomst vph-pers:startDatum ?start_overeenkomst .
+                OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
+
+                #Alleen overeenkomsten in gevraagde periode
+                FILTER (?start_overeenkomst <= ?eind_periode && (!BOUND(?eind_overeenkomst) || ?eind_overeenkomst >= ?start_periode))
+
+                #Koppel persoon, zodat unieke instanties geteld kunnen worden
+                ?persoon vph-pers:heeftWerkOvereenkomst ?overeenkomst .
+            }
+        }
+        
+    } UNION {
+        SELECT ?dagen_periode ?persoon (SUM(?dagen_overeenkomst) AS ?totaal_overeenkomst) 
+        WHERE 
+        {
+        	#definieer periode waarin overeenkomst geldig moet zijn
+            BIND("2020-01-01"^^xsd:date AS ?start_periode)
+            BIND("2020-12-31"^^xsd:date AS ?eind_periode)
+
+            #selecteer alle arbeids- en oproepovereenkomsten
+            ?overeenkomst a vph-pers:ArbeidsOvereenkomst .
+
+            #Selecteer alle functies die vph-pers:ZorgverlenerFunctie zijn
+            ?overeenkomst vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie .
+            
+            ?overeenkomst vph-pers:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
+
+            #Alleen overeenkomsten in gevraagde periode
+            FILTER (?start_overeenkomst <= ?eind_periode && (!BOUND(?eind_overeenkomst) || ?eind_overeenkomst >= ?start_periode))
+
+            #Koppel persoon, zodat unieke instanties geteld kunnen worden
+            ?persoon vph-pers:heeftWerkOvereenkomst ?overeenkomst .
+
+            #Corrigeer wanneer start of eind van de functie buiten de gevraagde periode valt
+            BIND(IF(?start_periode > ?start_overeenkomst, ?start_periode, ?start_overeenkomst) AS ?start_overeenkomst_corr)
+            BIND(IF((?eind_periode < ?eind_overeenkomst) || !BOUND(?eind_overeenkomst), ?eind_periode, ?eind_overeenkomst)
+                AS ?eind_overeenkomst_corr)
+
+            BIND ((360 * (YEAR(?eind_periode) - YEAR(?start_periode))) +
+                (30 * (MONTH(?eind_periode) - MONTH(?start_periode))) +
+                IF((DAY(?eind_periode) - DAY(?start_periode)) < 29, (DAY(?eind_periode) - DAY(?start_periode)), 29) + 1
+                AS ?dagen_periode)
+
+            BIND ((360 * (YEAR(?eind_overeenkomst_corr) - YEAR(?start_overeenkomst_corr))) +
+                (30 * (MONTH(?eind_overeenkomst_corr) - MONTH(?start_overeenkomst_corr))) +
+                IF((DAY(?eind_overeenkomst_corr) - DAY(?start_overeenkomst_corr)) < 29, (DAY(?eind_overeenkomst_corr) -
+                   DAY(?start_overeenkomst_corr)), 29) + 1
+                AS ?dagen_overeenkomst)
+        } 
+        GROUP BY ?persoon ?dagen_periode
+    } 
+    BIND (IF(?totaal_overeenkomst > ?dagen_periode, ?dagen_periode, ?totaal_overeenkomst) AS ?dagen_overeenkomst_corr)
+}

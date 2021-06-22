@@ -1,45 +1,57 @@
-PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
+#Ziekteverzuimpercentage volgens Vernet definitie (kalenderdagen)
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
 
-SELECT (SUM(?dagen_periode) AS ?totaal_werk) (SUM(?dagen_ziekte_corr) AS ?totaal_ziek) (ROUND((?totaal_ziek/?totaal_werk)*100) AS ?indicator)
+SELECT (SUM(?dagen_ziekte_corr) AS ?teller) (SUM(?werkdagen) AS ?noemer) (ROUND(?teller/?noemer*100) AS ?indicator)
 
-WHERE {
-    {
-        #selecteer werknemers met een arbeidsovereenkomst in de gevraagde periode
-        SELECT DISTINCT ?start_periode ?eind_periode ?werknemer
-        WHERE {
-            BIND ("2020-01-01"^^xsd:date AS ?start_periode)
-            BIND ("2020-12-31"^^xsd:date AS ?eind_periode)  
-            ?overeenkomst a vph-pers:ArbeidsOvereenkomst ;
-                          vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie ;  
-                          vph-pers:startDatum ?start_overeenkomst .
-            OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
-            FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
-            ?werknemer vph-pers:heeftWerkOvereenkomst ?overeenkomst .
-         }
-    }
-    ?werknemer vph-pers:heeftVerzuimPeriode ?periode .
-    ?periode vph-pers:startDatum ?start_ziekte .
-    OPTIONAL {?periode vph-pers:herstelDatum ?herstel_ziekte_voorl}
-    
-    #Alleen ziektemeldingen binnen de gevraagde periode
-    FILTER(?start_ziekte <= ?eind_periode && ((?herstel_ziekte_voorl >= ?start_periode) || (!BOUND(?herstel_ziekte_voorl))))
-    #Corrigeer voor ziekte die langer doorloopt dan de periode
-    BIND(IF(?herstel_ziekte_voorl > ?eind_periode, ?eind_periode, ?herstel_ziekte_voorl) AS ?herstel_ziekte)
-    
-    OPTIONAL {?periode vph-pers:ziektePercentage ?percentage_ziekte_voorl}
-    BIND(IF(BOUND(?percentage_ziekte_voorl), ?percentage_ziekte_voorl, "100"^^xsd:decimal) AS ?percentage_ziekte)
-    
-    #Tel aantal ziektedagen o.b.v. 12 maanden van 30 dagen per jaar en corrigeeer voor ziektepercentage
-    BIND ((360 * (YEAR(?herstel_ziekte) - YEAR(?start_ziekte))) +
-        (30 * (MONTH(?herstel_ziekte) - MONTH(?start_ziekte))) +
-        IF((DAY(?herstel_ziekte) - DAY(?start_ziekte)) < 29, (DAY(?herstel_ziekte) - DAY(?start_ziekte)), 29)
-        AS ?dagen_ziekte)
-    BIND(?dagen_ziekte * ?percentage_ziekte / 100 AS ?dagen_ziekte_corr)
-    
-    #Tel aantal dagen in periode o.b.v. 12 maanden van 30 dagen per jaar
-    BIND ((360 * (YEAR(?eind_periode) - YEAR(?start_periode))) +
-        (30 * (MONTH(?eind_periode) - MONTH(?start_periode))) +
-        IF((DAY(?eind_periode) - DAY(?start_periode)) < 29, (DAY(?eind_periode) - DAY(?start_periode)), 29) + 1
-        AS ?dagen_periode)
+WHERE { 
+        BIND ("2020-01-01"^^xsd:date AS ?start_periode)
+        BIND ("2020-12-31"^^xsd:date AS ?eind_periode)
+
+        #Selecteer alle contracten voor zorgverlener functies en bijbehorende werknemers
+        ?overeenkomst a vph-pers:ArbeidsOvereenkomst ;
+                      vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie ;  
+                      vph-pers:heeftOpdrachtnemer ?werknemer ;
+                      vph-pers:startDatum ?start_overeenkomst .
+        OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_overeenkomst}
+
+        #Alleen overeenkomsten in de gevraagde periode
+        FILTER(?start_overeenkomst <= ?eind_periode && ((?eind_overeenkomst >= ?start_periode) || (!BOUND(?eind_overeenkomst))))
+      
+        ?omvang ^vph-pers:heeftContractOmvang ?overeenkomst ;
+                vph-pers:parttimeFactor ?ptf ;
+                vph-pers:startDatum ?start_omvang_voorl .
+        OPTIONAL {?omvang vph-pers:eindDatum ?eind_omvang_voorl}
+        #Corrigeer voor overlap buiten de gevraagde periode
+        BIND(IF(!BOUND(?eind_omvang_voorl) || ?eind_omvang_voorl > ?eind_periode, ?eind_periode, ?eind_omvang_voorl) AS ?eind_omvang)
+        BIND(IF(?start_omvang_voorl < ?start_periode, ?start_periode, ?start_omvang_voorl) AS ?start_omvang)
+        
+        #Bepaal voor gegeven periodes met zekere parttimefactor de werkdagen en ziektedagen
+        {
+            #Tel aantal dagen in periode o.b.v. 12 maanden van 30 dagen per jaar
+            BIND ((360 * (YEAR(?eind_omvang) - YEAR(?start_omvang))) +
+                (30 * (MONTH(?eind_omvang) - MONTH(?start_omvang))) +
+                IF((DAY(?eind_omvang) - DAY(?start_omvang)) < 29, (DAY(?eind_omvang) - DAY(?start_omvang)), 29) + 1
+                AS ?dagen)
+            #Bepaal aantal werdagen door correctie parttime factor
+            BIND(?dagen * ?ptf AS ?werkdagen)
+        } UNION {
+            ?werknemer vph-pers:heeftVerzuimPeriode ?verzuim .
+            ?verzuim vph-pers:bijbehorendeArbeidsOngeschiktheid ?ao ;
+                    vph-pers:startDatum ?start_verzuim .             
+            OPTIONAL {?verzuim vph-pers:herstelDatum ?herstel_verzuim}
+            FILTER (?start_verzuim >= ?start_omvang && ?start_verzuim <= ?eind_omvang)
+            ?ao vph-pers:aoPercentage ?ao_p ;
+                vph-pers:startDatum ?start_ao .
+            OPTIONAL {?ao vph-pers:eindDatum ?herstel_ao_voorl}
+            FILTER (?start_ao >= ?start_omvang && ?start_ao <= ?eind_omvang)
+            BIND(IF(BOUND(?herstel_ao_voorl), ?herstel_ao_voorl, ?eind_omvang) AS ?herstel_ao)
+            
+            #Tel aantal ziektedagen o.b.v. 12 maanden van 30 dagen per jaar en corrigeeer voor ziektepercentage
+            BIND ((360 * (YEAR(?herstel_ao) - YEAR(?start_ao))) +
+                (30 * (MONTH(?herstel_ao) - MONTH(?start_ao))) +
+                IF((DAY(?herstel_ao) - DAY(?start_ao)) < 29, (DAY(?herstel_ao) - DAY(?start_ao)), 29)
+                AS ?dagen_ziekte)
+            BIND(?dagen_ziekte * ?ptf * ?ao_p / 100 AS ?dagen_ziekte_corr)
+        }
 }
