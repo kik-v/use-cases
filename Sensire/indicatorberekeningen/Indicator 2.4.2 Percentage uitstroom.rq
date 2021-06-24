@@ -8,15 +8,14 @@ WHERE
 {
     {
         SELECT ?persoon (MAX(?geldig_peildatum) AS ?geldig_peildatum) (MAX(?geldig_verleden) AS ?geldig_verleden)
-        #select *
         WHERE 
         {
             #definieer peildatum en hoe ver teruggekeken wordt
-            BIND ("2008-10-27"^^xsd:date AS ?peildatum)
+            BIND ("2020-01-01"^^xsd:date AS ?peildatum)
             BIND (?peildatum - "P1Y"^^xsd:duration AS ?verleden)
             ?overeenkomst a vph-pers:ArbeidsOvereenkomst ;
             #Selecteer alle functies die vph-pers:ZorgverlenerFunctie zijn
-                            #vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie ;
+                            vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie ;
                             vph-pers:heeftOpdrachtnemer ?persoon ;
                             vph-pers:startDatum ?start_overeenkomst .
             OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_okomst}

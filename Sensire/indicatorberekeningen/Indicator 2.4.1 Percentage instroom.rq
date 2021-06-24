@@ -1,0 +1,32 @@
+PREFIX vph-g: <http://purl.org/ozo/vph-g#>
+PREFIX vph-pers: <http://purl.org/ozo/vph-pers#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT (SUM(?geldig_peildatum)-SUM(?geldig_verleden) AS ?teller) ((SUM(?geldig_peildatum) + SUM(?geldig_verleden))/2 AS ?noemer) (ROUND((SUM(?geldig_peildatum)-SUM(?geldig_verleden))/((SUM(?geldig_peildatum) + SUM(?geldig_verleden))/2)*100) AS ?indicator)
+WHERE
+{
+    {
+        SELECT ?persoon (MAX(?geldig_peildatum) AS ?geldig_peildatum) (MAX(?geldig_verleden) AS ?geldig_verleden)
+        WHERE 
+        {
+            #definieer peildatum en hoe ver teruggekeken wordt
+            BIND ("2019-01-01"^^xsd:date AS ?peildatum)
+            BIND (?peildatum - "P1Y"^^xsd:duration AS ?verleden)
+            ?overeenkomst a vph-pers:ArbeidsOvereenkomst ;
+            #Selecteer alle functies die vph-pers:ZorgverlenerFunctie zijn
+                            vph-pers:bijbehorendeFunctie/a vph-pers:ZorgverlenerFunctie ;
+                            vph-pers:heeftOpdrachtnemer ?persoon ;
+                            vph-pers:startDatum ?start_overeenkomst .
+            OPTIONAL {?overeenkomst vph-pers:eindDatum ?eind_okomst}
+            #om maximale datum te bepalen, neem 1-1-2199 als einddatum indien deze ontbreekt
+            BIND(IF(!BOUND(?eind_okomst), "2199-01-01"^^xsd:date, ?eind_okomst) AS ?eind_overeenkomst)
+            #dienstverbanden geldig op peildatum
+            BIND (IF(?start_overeenkomst <= ?peildatum && ?eind_overeenkomst >= ?peildatum, "1"^^xsd:integer, "0"^^xsd:integer) AS ?geldig_peildatum)
+            #dienstverbanden geldig in het verlegen
+            BIND (IF(?start_overeenkomst <= ?verleden && ?eind_overeenkomst >= ?verleden, "1"^^xsd:integer, "0"^^xsd:integer) AS ?geldig_verleden)
+        }
+        GROUP BY ?persoon
+    }
+    FILTER (?geldig_peildatum = "1"^^xsd:integer)
+}
