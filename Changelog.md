@@ -1,0 +1,22 @@
+# Veranderingen ontologie (versie 1.1, juli 2021)
+Een overzicht van de veranderingen in de ontologie t.o.v. de 0.1 versie van januari 2021. De veranderingen zijn in detail altijd terug te vinden doordat publicatie plaatsvindt via een technisch platform dat alle wijzigingen bijhoudt. Echter, de weergave van de veranderingen is erg technisch en bovendien is het aantal wijzigingen talrijk sinds de laaste publicatie waardoor het lastig is door de bomen het bos te zien.
+
+Hieronder volgt een daarom een kort overzicht van de wijzigingen (met voorbeelden) en de motivatie achter die wijzigingen. Over het algemeen kan gesteld worden dat de functionele wijzigingen minimaal zijn en de technische wijzigingen fors.
+
+## Aanleiding wijzigingen
+In de ontwikkeling van de 1.1 versie van de ontologie zijn drie factoren van belang
+1. Doorontwikkeling van de generieke conceptuele ontologie. Deze was in januari eenvoudigweg nog lang niet volledig en wordt nog steeds doorontwikkeld. De ontologie gericht op personele samenstelling wordt 'opgehangen' binnen het framework van de conceptuele ontologie.
+2. Door het uitvoeren van praktijktoetsen is in de afgelopen maanden ervaring gedaan met echte gegevens uit de bronsystemen van verpleeghuizen. Een  praktijktoets legt daarmee onvolledigheden in de ontologie bloot; een belangrijke reden om praktijktoetsen uit te voeren.
+3. Doordat is gestart met een ontologie voor de financiele gegevens van verpleeghuizen, wordt parallel op meerdere plekken de ontologie gewijzigd. Om de beheersbaarheid van de ontologie (ook naar de toekomst) te garanderen, is besloten de 'KIK-ontologie' op te splitsen in verschillende kennisdomeinen: generiek (oude VPH ontologie), personeel (oude KIK-ontologie), financieel, zorg, organisatie en client. Deze opsplitsing zou in de toekomst nog aangevuld kunnen worden indien gewenst.
+4. Vanwege historische redenen waren veel termen in de KIK-ontologie in het Engels. Op verzoek zijn deze inmiddels nagenoeg allemaal aangepast naar Nederlands.
+
+## Voorbeelden
+Een aantal voorbeelden (zeker geen uitputtende lijst) van veranderingen die zijn aangebracht als gevolg van bovenstaande puten.
+* De relatie tussen een werkovereenkomst en een functie maakte gebruik van het generieke koppeling kik:hasDescription. Deze werd ook gebruikt voor de relatie naar contractomvang, ziekte periodes en urenadministraties. Om ervoor te zorgen dat de berekeningen voor indicatoren eenvoudiger worden (daardoor beter leesbaar en onderhoudbaar) is deze relatie gesplitst in: bijbehorendeFunctie, heeftContractOmvang, bijbehorendeVerzuimPeriode en bijbehorendeWerkPeriode.
+* De relatie kik:hasAgreement en de inverse relatie kik:agreementOf is specifieker geworden om goed onderscheid te kunnen maken tussen de opdrachtnemer (de werknemer) en de opdrachtgever (de werkgever) van werkovereenkomsten. heeftOpdrachtnemer en heeftOpdrachtgever zijn daarom toegevoegd.
+* Om onderscheid te maken tussen de relatie van een werknemer met zijn/haar functie en de werkovereenkomst (het contract) waarop die functie vermeld staat, is een functie aan een werkovereenkomst gekoppeld via bijbehorendeFunctie en aan de werknemer via heeftFunctie. De relatie tussen een functie en een werkovereenkomst ís immers ook een ander soort relatie van de tussen een functie en een werknemer. Door dit onderscheid duidelijker te definieren is de ontologie beter geschikt om de data in bronsystemen te hergebruiken. Omdat afhankelijk van het type bronsysteem de ene of de andere relatie vastligt.
+* kik:KostenPlaats is verplaatst naar de financiele ontologie en heet nu vph-fin:KostenPlaats
+* De 'prefix' kik is vervangen door vph-pers (van personeel)
+* De 'prefix' vph is vervangen door vph-g (van generiek)
+* Oproepovereenkomsten zijn onderdeel gemaakt van Arbeidsoverenkomsten omdat dit beter aansluit bij zowel de brongegevens als de definities voor de indicatoren.
+* Voorbeeld van een van de vele technische wijzigingen in de generieke ontologie die geen functionele impact heeft voor de ontologie personele samenstelling, maar wel van belang is voor de technische en logische consistentie van alle deel-ontologieën samen: vph:Descriptions is vervangen door vph-g:SocialInformationObject.
